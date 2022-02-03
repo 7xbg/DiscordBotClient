@@ -16,15 +16,23 @@ namespace DiscordBotClient
     {
         public About(IDiscordClient client)
         {
-            string url = client.GetUserAsync(715891837138632744).Result.GetAvatarUrl();
+            try
+            {
+                string url = client.GetUserAsync(715891837138632744).Result.GetAvatarUrl();
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create(url);
-            System.Net.WebResponse response = request.GetResponse();
-            System.IO.Stream responseStream = response.GetResponseStream();
-            Bitmap bitmap = new Bitmap(responseStream);
+                System.Net.WebRequest request = System.Net.WebRequest.Create(url);
+                System.Net.WebResponse response = request.GetResponse();
+                System.IO.Stream responseStream = response.GetResponseStream();
+                Bitmap bitmap = new Bitmap(responseStream);
 
-            InitializeComponent();
-            pictureBox1.Image = bitmap;
+                InitializeComponent();
+                pictureBox1.Image = bitmap;
+            }
+            catch
+            {
+                MessageBox.Show("Error Initalizing", "Unknown Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void About_Load(object sender, EventArgs e)
@@ -35,6 +43,16 @@ namespace DiscordBotClient
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/7xbg");
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/7xbg/DiscordBotClient");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/SanjaySunil/BetterDiscordPanel");
         }
     }
 }
