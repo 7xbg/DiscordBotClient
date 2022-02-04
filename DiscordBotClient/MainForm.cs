@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using DiscordBotClient.ManageUsers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//THTC = Top Hat Tombo Client
 
 namespace DiscordBotClient
 {
@@ -26,8 +28,19 @@ namespace DiscordBotClient
             InitializeComponent();
         }
 
+        private void Wi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Enabled = true;
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
+            DialogResult res = MessageBox.Show("Join THTC Support Server?", "?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if(res == DialogResult.Yes)
+            {
+                
+            }
+
             this.MinimumSize = new System.Drawing.Size(450, 300);
             Thread thr = new Thread(new ThreadStart(startbot));
             thr.Start();
@@ -48,6 +61,11 @@ namespace DiscordBotClient
                     }
                 }
             }
+
+            WaitInit wi = new WaitInit();
+            wi.FormClosing += Wi_FormClosing;
+            wi.Show();
+            this.Hide();
         }
 
         private void startbot()
@@ -61,7 +79,11 @@ namespace DiscordBotClient
 
         public async Task RunBotAsync()
         {
-            _client = new DiscordSocketClient();
+            var config = new DiscordSocketConfig
+            {
+                AlwaysDownloadUsers = true
+            };
+            _client = new DiscordSocketClient(config);
             _commands = new CommandService();
 
             _services = new ServiceCollection()
@@ -92,6 +114,10 @@ namespace DiscordBotClient
 
         private async Task HandleCommandAsync(SocketMessage arg)
         {
+            if (_client == null) return;
+            if (selectedGuild == null) return;
+            if (selectedChannel == null) return;
+
             var message = arg as SocketUserMessage;
             var context = new SocketCommandContext(_client, message);
             if (message.Author.IsBot) return;
@@ -113,8 +139,8 @@ namespace DiscordBotClient
             }));
         }
 
-        private SocketGuild selectedGuild;
-        private SocketGuildChannel selectedChannel;
+        private static SocketGuild selectedGuild;
+        private static SocketGuildChannel selectedChannel;
         private void serverList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (selectedGuild == null)
@@ -295,7 +321,7 @@ namespace DiscordBotClient
             messageBox.Location = new System.Drawing.Point(221, this.Height - 71);
             backButton.Location = new System.Drawing.Point(11, this.Height - 69);
 
-            this.Text = "dbc main - w = " + this.Width + " | h = " + this.Height + "";
+            this.Text = "thtc main - w = " + this.Width + " | h = " + this.Height + "";
         }
 
         private void setChatBoxZoomToolStripMenuItem_Click(object sender, EventArgs e)
@@ -410,6 +436,95 @@ namespace DiscordBotClient
         }
 
         private void Abt_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void secretToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            checkBox1.Visible = true;
+        }
+
+        private Thread thr;
+        private bool spam = false;
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(thr == null)
+            {
+                thr = new Thread(new ThreadStart(SpamThread));
+                thr.Start();
+            }
+
+            if (checkBox1.Checked)
+            {
+                spam = true;
+            }
+            else
+            {
+                spam = false;
+            }
+        }
+
+        private void SpamThread()
+        {
+            while(true)
+            {
+                if (!spam) return;
+                if (selectedGuild == null) return;
+                if (selectedChannel == null) return;
+
+                selectedGuild.GetTextChannel(selectedChannel.Id).SendMessageAsync(messageBox.Text);
+                Thread.Sleep(750);
+            }
+        }
+
+        private void manageUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Mu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void manageUsersToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (selectedGuild != null)
+            {
+                ManageUsers.ManageUsers mu = new ManageUsers.ManageUsers(selectedGuild);
+                mu.FormClosing += Mu_FormClosing;
+                mu.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Select Server to Manage Users", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void aboutBotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void botGuildInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (selectedGuild != null)
+            {
+                ManageUser mu = new ManageUser(selectedGuild.GetUser(_client.CurrentUser.Id));
+                mu.FormClosing += Mu_FormClosing1;
+                mu.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Select Guild to Get Bot's Guild Info", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Mu_FormClosing1(object sender, FormClosingEventArgs e)
         {
             this.Show();
         }

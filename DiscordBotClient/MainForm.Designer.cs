@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.serverList = new System.Windows.Forms.ListBox();
             this.selectedServerLabel = new System.Windows.Forms.Label();
             this.chatBox = new System.Windows.Forms.RichTextBox();
@@ -39,6 +40,7 @@
             this.miscToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setChatBoxZoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setWindowDimensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.botToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setBotStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setBotWatchingStatusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +48,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setBotNicknameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.secretToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.guildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.botGuildInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -120,7 +127,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miscToolStripMenuItem,
-            this.botToolStripMenuItem});
+            this.botToolStripMenuItem,
+            this.guildToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(834, 24);
@@ -151,15 +159,24 @@
             this.setWindowDimensionsToolStripMenuItem.Text = "Set Window Dimensions";
             this.setWindowDimensionsToolStripMenuItem.Click += new System.EventHandler(this.setWindowDimensionsToolStripMenuItem_Click);
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // botToolStripMenuItem
             // 
             this.botToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.setBotStatusToolStripMenuItem,
             this.setBotWatchingStatusToolStripMenuItem1,
             this.setBotStatusOtherToolStripMenuItem1,
+            this.setBotNicknameToolStripMenuItem1,
             this.toolStripSeparator1,
             this.logoutToolStripMenuItem,
-            this.setBotNicknameToolStripMenuItem1});
+            this.toolStripSeparator2,
+            this.secretToolStripMenuItem});
             this.botToolStripMenuItem.Name = "botToolStripMenuItem";
             this.botToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.botToolStripMenuItem.Text = "Bot";
@@ -204,18 +221,59 @@
             this.setBotNicknameToolStripMenuItem1.Text = "Set Bot Nickname";
             this.setBotNicknameToolStripMenuItem1.Click += new System.EventHandler(this.setBotNicknameToolStripMenuItem1_Click);
             // 
-            // aboutToolStripMenuItem
+            // secretToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.secretToolStripMenuItem.Name = "secretToolStripMenuItem";
+            this.secretToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.secretToolStripMenuItem.Text = "Secret...";
+            this.secretToolStripMenuItem.Click += new System.EventHandler(this.secretToolStripMenuItem_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(752, 31);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(70, 17);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "Spammer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
+            // 
+            // guildToolStripMenuItem
+            // 
+            this.guildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageUsersToolStripMenuItem,
+            this.botGuildInfoToolStripMenuItem});
+            this.guildToolStripMenuItem.Name = "guildToolStripMenuItem";
+            this.guildToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.guildToolStripMenuItem.Text = "Guild";
+            // 
+            // manageUsersToolStripMenuItem
+            // 
+            this.manageUsersToolStripMenuItem.Name = "manageUsersToolStripMenuItem";
+            this.manageUsersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageUsersToolStripMenuItem.Text = "Manage Users";
+            this.manageUsersToolStripMenuItem.Click += new System.EventHandler(this.manageUsersToolStripMenuItem_Click_1);
+            // 
+            // botGuildInfoToolStripMenuItem
+            // 
+            this.botGuildInfoToolStripMenuItem.Name = "botGuildInfoToolStripMenuItem";
+            this.botGuildInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.botGuildInfoToolStripMenuItem.Text = "Bot Guild Info";
+            this.botGuildInfoToolStripMenuItem.Click += new System.EventHandler(this.botGuildInfoToolStripMenuItem_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 481);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.messageBox);
@@ -224,11 +282,12 @@
             this.Controls.Add(this.selectedServerLabel);
             this.Controls.Add(this.serverList);
             this.Controls.Add(this.menuStrip1);
+            this.Enabled = false;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "dbc main - w = 850 | h = 520";
+            this.Text = "thtc main - w = 850 | h = 520";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
@@ -260,5 +319,11 @@
         private System.Windows.Forms.ToolStripMenuItem setBotNicknameToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem secretToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem guildToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem manageUsersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem botGuildInfoToolStripMenuItem;
     }
 }
