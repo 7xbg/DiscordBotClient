@@ -35,11 +35,6 @@ namespace DiscordBotClient
             }
         }
 
-        private void About_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/7xbg");
