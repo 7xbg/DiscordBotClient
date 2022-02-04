@@ -38,7 +38,7 @@ namespace DiscordBotClient
             DialogResult res = MessageBox.Show("Join THTC Support Server?", "?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if(res == DialogResult.Yes)
             {
-                
+                Process.Start("https://discord.gg/jKprXkfG4Z");
             }
 
             this.MinimumSize = new System.Drawing.Size(450, 300);
