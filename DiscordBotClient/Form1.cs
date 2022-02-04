@@ -53,5 +53,18 @@ namespace DiscordBotClient
         {
             maskedTextBox1.PasswordChar = checkBox2.Checked ? '\0' : 'x';
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutNoLogin abt = new AboutNoLogin();
+            abt.FormClosing += Abt_FormClosing;
+            abt.Show();
+            this.Hide();
+        }
+
+        private void Abt_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Show();
+        }
     }
 }
