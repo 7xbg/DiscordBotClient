@@ -38,22 +38,23 @@
             this.backButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.miscToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.outputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setChatBoxZoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setWindowDimensionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.botToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setBotStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setBotWatchingStatusToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.setBotStatusOtherToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.setBotNicknameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setBotNicknameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.secretToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.secretToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.botGuildInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,8 @@
             this.serverList.Size = new System.Drawing.Size(199, 394);
             this.serverList.TabIndex = 0;
             this.serverList.SelectedIndexChanged += new System.EventHandler(this.serverList_SelectedIndexChanged);
+            this.serverList.DoubleClick += new System.EventHandler(this.serverList_DoubleClick);
+            this.serverList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.serverList_MouseDown);
             // 
             // selectedServerLabel
             // 
@@ -138,12 +141,27 @@
             // miscToolStripMenuItem
             // 
             this.miscToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.outputToolStripMenuItem,
             this.setChatBoxZoomToolStripMenuItem,
-            this.setWindowDimensionsToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.setWindowDimensionsToolStripMenuItem});
             this.miscToolStripMenuItem.Name = "miscToolStripMenuItem";
             this.miscToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.miscToolStripMenuItem.Text = "Misc";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // outputToolStripMenuItem
+            // 
+            this.outputToolStripMenuItem.Name = "outputToolStripMenuItem";
+            this.outputToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.outputToolStripMenuItem.Text = "Output";
+            this.outputToolStripMenuItem.Click += new System.EventHandler(this.outputToolStripMenuItem_Click);
             // 
             // setChatBoxZoomToolStripMenuItem
             // 
@@ -158,13 +176,6 @@
             this.setWindowDimensionsToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.setWindowDimensionsToolStripMenuItem.Text = "Set Window Dimensions";
             this.setWindowDimensionsToolStripMenuItem.Click += new System.EventHandler(this.setWindowDimensionsToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // botToolStripMenuItem
             // 
@@ -202,6 +213,13 @@
             this.setBotStatusOtherToolStripMenuItem1.Text = "Set Bot Status Other";
             this.setBotStatusOtherToolStripMenuItem1.Click += new System.EventHandler(this.setBotStatusOtherToolStripMenuItem1_Click);
             // 
+            // setBotNicknameToolStripMenuItem1
+            // 
+            this.setBotNicknameToolStripMenuItem1.Name = "setBotNicknameToolStripMenuItem1";
+            this.setBotNicknameToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
+            this.setBotNicknameToolStripMenuItem1.Text = "Set Bot Nickname";
+            this.setBotNicknameToolStripMenuItem1.Click += new System.EventHandler(this.setBotNicknameToolStripMenuItem1_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -214,12 +232,10 @@
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click_1);
             // 
-            // setBotNicknameToolStripMenuItem1
+            // toolStripSeparator2
             // 
-            this.setBotNicknameToolStripMenuItem1.Name = "setBotNicknameToolStripMenuItem1";
-            this.setBotNicknameToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
-            this.setBotNicknameToolStripMenuItem1.Text = "Set Bot Nickname";
-            this.setBotNicknameToolStripMenuItem1.Click += new System.EventHandler(this.setBotNicknameToolStripMenuItem1_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
             // 
             // secretToolStripMenuItem
             // 
@@ -227,23 +243,6 @@
             this.secretToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.secretToolStripMenuItem.Text = "Secret...";
             this.secretToolStripMenuItem.Click += new System.EventHandler(this.secretToolStripMenuItem_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(752, 31);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(70, 17);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Spammer";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(197, 6);
             // 
             // guildToolStripMenuItem
             // 
@@ -257,16 +256,28 @@
             // manageUsersToolStripMenuItem
             // 
             this.manageUsersToolStripMenuItem.Name = "manageUsersToolStripMenuItem";
-            this.manageUsersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manageUsersToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.manageUsersToolStripMenuItem.Text = "Manage Users";
             this.manageUsersToolStripMenuItem.Click += new System.EventHandler(this.manageUsersToolStripMenuItem_Click_1);
             // 
             // botGuildInfoToolStripMenuItem
             // 
             this.botGuildInfoToolStripMenuItem.Name = "botGuildInfoToolStripMenuItem";
-            this.botGuildInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.botGuildInfoToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.botGuildInfoToolStripMenuItem.Text = "Bot Guild Info";
             this.botGuildInfoToolStripMenuItem.Click += new System.EventHandler(this.botGuildInfoToolStripMenuItem_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(752, 31);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(70, 17);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "Spammer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // MainForm
             // 
@@ -325,5 +336,6 @@
         private System.Windows.Forms.ToolStripMenuItem guildToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageUsersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem botGuildInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem outputToolStripMenuItem;
     }
 }
