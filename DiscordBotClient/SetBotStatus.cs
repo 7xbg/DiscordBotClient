@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace DiscordBotClient
 {
     public partial class SetBotStatus : Form
     {
-        public delegate void Notify(string status);
+        public delegate void Notify(string status, string streamURL, ActivityType type);
         public event Notify notify;
         public SetBotStatus()
         {
@@ -21,7 +22,20 @@ namespace DiscordBotClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            notify?.Invoke(textBox1.Text);
+            ActivityType type;
+            if (comboBox1.Text == "Listening")
+                type = ActivityType.Listening;
+            else if (comboBox1.Text == "Watching")
+                type = ActivityType.Watching;
+            else if (comboBox1.Text == "Playing")
+                type = ActivityType.Playing;
+            else
+            {
+                MessageBox.Show("Invalid Status", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            notify?.Invoke(textBox1.Text, null, type);
             this.Close();
         }
     }
