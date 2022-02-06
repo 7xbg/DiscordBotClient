@@ -97,33 +97,41 @@ namespace DiscordBotClient.ManageUsers
 
         private void idTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            ulong id;
-            try
+            if(e.KeyCode == Keys.Enter)
             {
-                id = ulong.Parse(idTextBox.Text);
-            }
-            catch
-            {
-                MessageBox.Show("ID In Incorrect Format", "Parse ulong Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+                ulong id;
+                try
+                {
+                    id = ulong.Parse(idTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("ID In Incorrect Format", "Parse ulong Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-            if (Guild.GetUser(id) != null)
-            {
-                ManageUser mu = new ManageUser(Guild.GetUser(id));
-                mu.FormClosing += Mu_FormClosing;
-                mu.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Error Getting User", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Guild.GetUser(id) != null)
+                {
+                    ManageUser mu = new ManageUser(Guild.GetUser(id));
+                    mu.FormClosing += Mu_FormClosing;
+                    mu.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Error Getting User", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             ReloadUsers();
+        }
+
+        private void idTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

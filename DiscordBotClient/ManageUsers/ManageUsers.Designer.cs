@@ -85,6 +85,7 @@
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(384, 20);
             this.idTextBox.TabIndex = 4;
+            this.idTextBox.TextChanged += new System.EventHandler(this.idTextBox_TextChanged);
             this.idTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.idTextBox_KeyDown);
             // 
             // button1
